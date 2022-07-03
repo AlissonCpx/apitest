@@ -26,6 +26,6 @@ public class UserModel {
     private String mobile_phone;
 
     @OneToMany
-    private List<CrmModel> crms = new ArrayList<>();
+    private List<CrmModel> crms;
 
 }

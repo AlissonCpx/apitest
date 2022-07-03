@@ -6,6 +6,7 @@ import com.api.test.sdconecta.apitest.repository.CrmRepository;
 import com.api.test.sdconecta.apitest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +28,23 @@ public class UserController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public UserModel addUser(@RequestBody UserModel user) {
-        List<CrmModel> crms = crmRepository.saveAll(user.getCrms());
-        user.setCrms(crms);
+    public ResponseEntity addUser(@RequestBody UserModel user) {
+        try {
+            List<CrmModel> crms = crmRepository.saveAll(user.getCrms());
+            user.setCrms(crms);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+        }
+    }
 
-        return userRepository.save(user);
+    @PutMapping
+    public ResponseEntity updateUser(@RequestBody UserModel user) {
+        try {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(userRepository.save(user));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+        }
     }
 
 }
