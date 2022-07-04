@@ -35,7 +35,7 @@ public class UserController {
 
     @GetMapping("/name={name}")
     public ResponseEntity listAllByName(@PathVariable("name") String name) {
-        if (name.isEmpty()) {
+        if (!name.isEmpty()) {
             List<UserModel> users = userRepository.findByName(name).get();
             return ResponseEntity.status(HttpStatus.OK).body(users);
         }
@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/specialty={specialty}")
     public ResponseEntity listAllBySpecialty(@PathVariable("specialty") String specialty) {
-        if (specialty.isEmpty()) {
+        if (!specialty.isEmpty()) {
             List<UserModel> users = userRepository.findBySpecielty(specialty);
             return ResponseEntity.status(HttpStatus.OK).body(users);
         }
