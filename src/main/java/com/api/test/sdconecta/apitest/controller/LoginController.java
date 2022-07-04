@@ -41,6 +41,8 @@ public class LoginController {
             if (user.isPresent()) {
                 SdConnectService sd = new SdConnectService();
                 UserAcessDecorator userAcess = sd.validUser(user.get()).getBody();
+                user.get().setLastAuthorizationStatus(userAcess.getAuthorization_status());
+                userRepository.save(user.get());
                 boolean validUser = encoder.matches(password, user.get().getPassword());
                 if (validUser) {
                     return ResponseEntity.status(HttpStatus.OK).body(userAcess);

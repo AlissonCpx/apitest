@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +21,10 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    private final PasswordEncoder encoder;
+    @Autowired
+    private PasswordEncoder encoder;
 
-    public UserController(PasswordEncoder encoder) {
-        this.encoder = encoder;
+    public UserController() {
     }
 
     @GetMapping
@@ -98,4 +100,18 @@ public class UserController {
         }
     }
 
+    @PostConstruct
+    public void addAdmin() {
+        Optional<UserModel> userAdmin = userRepository.findByAdmin(true);
+        if (!userAdmin.isPresent()) {
+            UserModel user = new UserModel();
+            user.setEmail("Admin@email.com");
+            user.setName("Admin");
+            user.setPassword(encoder.encode("admin"));
+            user.setCrms(new ArrayList<>());
+            user.setMobile_phones(new ArrayList<>());
+            user.setAdmin(true);
+            userRepository.save(user);
+        }
+    }
 }

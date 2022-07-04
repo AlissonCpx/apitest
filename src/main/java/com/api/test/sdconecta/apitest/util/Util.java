@@ -9,7 +9,7 @@ public class Util {
     public static Properties getProp() throws IOException {
         Properties props = new Properties();
         FileInputStream file = new FileInputStream(
-                "/home/christian/IntelliJProjects/apitest/src/main/resources/application.properties");
+                "reg.properties");
         props.load(file);
         return props;
     }

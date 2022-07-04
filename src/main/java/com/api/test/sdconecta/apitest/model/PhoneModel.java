@@ -11,13 +11,10 @@ public class PhoneModel extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
-
     @Column
     private String ddd;
-
     @Column
     private String number;
-
     @Column
     private String type;
 

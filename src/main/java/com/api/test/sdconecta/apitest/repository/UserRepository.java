@@ -19,5 +19,6 @@ public interface UserRepository extends JpaRepository<UserModel, Long> {
    @Query(value = "SELECT u FROM UserModel u INNER JOIN u.crms c WHERE c.specialty = ?1")
     public List<UserModel> findBySpecielty(String specielty);
 
+    public Optional<UserModel> findByAdmin(Boolean bool);
 
 }

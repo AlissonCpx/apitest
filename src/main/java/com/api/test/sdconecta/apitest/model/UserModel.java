@@ -1,8 +1,8 @@
 package com.api.test.sdconecta.apitest.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,6 +17,7 @@ public class UserModel extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column(nullable = false)
     private String name;
@@ -24,6 +25,9 @@ public class UserModel extends BaseEntity {
     private String surname;
     @Column
     private String lastAuthorizationStatus;
+    @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean admin = false;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<CrmModel> crms;
