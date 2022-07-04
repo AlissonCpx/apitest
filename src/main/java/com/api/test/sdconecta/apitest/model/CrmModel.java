@@ -1,12 +1,11 @@
 package com.api.test.sdconecta.apitest.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 @Data
 @Entity
-public class CrmModel {
+public class CrmModel extends BaseEntity {
 
     @Id
     @GeneratedValue()

@@ -2,14 +2,14 @@ package com.api.test.sdconecta.apitest.model;
 
 
 import lombok.Data;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-public class UserModel {
+public class UserModel extends BaseEntity {
 
     @Id
     @GeneratedValue()
@@ -23,9 +23,12 @@ public class UserModel {
     @Column
     private String surname;
     @Column
-    private String mobile_phone;
+    private String lastAuthorizationStatus;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CrmModel> crms;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PhoneModel> mobile_phones;
 
 }
