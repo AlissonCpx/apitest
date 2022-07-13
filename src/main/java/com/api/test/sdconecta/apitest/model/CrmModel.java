@@ -5,10 +5,11 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@SequenceGenerator(name = "seqcrmmodel", allocationSize = 1, sequenceName = "seqcrmmodel")
 public class CrmModel extends BaseEntity {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(generator = "seqcrmmodel" ,strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private String crm;

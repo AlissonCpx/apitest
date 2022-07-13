@@ -9,10 +9,11 @@ import java.util.List;
 
 @Data
 @Entity
+@SequenceGenerator(name = "sequsermodel", allocationSize = 1, sequenceName = "sequsermodel")
 public class UserModel extends BaseEntity {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(generator = "sequsermodel",strategy = GenerationType.AUTO)
     private Long id;
     @Column(unique = true, nullable = false)
     private String email;
